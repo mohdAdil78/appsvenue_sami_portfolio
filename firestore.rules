@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { return isSignedIn() && request.auth.token.email == "avedisinfosys@gmail.com"; } // Allowing the user's email
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /clients/{clientId} {
+      allow list: if true; // Publicly readable
+      allow get: if true;
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

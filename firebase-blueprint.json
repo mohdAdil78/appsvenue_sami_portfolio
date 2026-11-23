@@ -1,0 +1,20 @@
+{
+  "entities": {
+    "client": {
+      "title": "Client",
+      "description": "A trusted client partner",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The name of the client" },
+        "logoUrl": { "type": "string", "description": "The URL of the client's logo" }
+      },
+      "required": ["name", "logoUrl"]
+    }
+  },
+  "firestore": {
+    "/clients/{clientId}": {
+      "schema": { "$ref": "#/entities/client" },
+      "description": "The collection of trusted clients"
+    }
+  }
+}
